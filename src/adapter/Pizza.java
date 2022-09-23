@@ -1,5 +1,8 @@
 package adapter;
 
+/*
+ * Template for a pizza class.
+ */
 public abstract class Pizza {
     protected String ingredient;
     protected String cheese;
