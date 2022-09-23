@@ -1,0 +1,2 @@
+# ignores all java generated files
+*.class
