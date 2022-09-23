@@ -1,11 +1,11 @@
 package adapter;
 
-import decorator.Baguette;
+import decorator.PanBaguette.Baguette;
 
 /*
  * Class that adapts a Pizza into a Baguette.
  */
-class PizzaAdapter extends Baguette {
+class PizzaAdapter implements Baguette {
     Pizza pizza;
 
     public PizzaAdapter(Pizza pizza) {
@@ -18,7 +18,7 @@ class PizzaAdapter extends Baguette {
      * @return String The pizza complete description.
      */
     @Override
-    public String getDescription() {
+    public String getDescripcion() {
         return "Pizza with " + pizza.getIngredient() + ", " + pizza.getCheese() + ", " + pizza.getMeat() + ", "
                 + pizza.getDough() + ", and costs: $" + pizza.getCost();
     }
@@ -29,8 +29,18 @@ class PizzaAdapter extends Baguette {
      * @return double The pizza cost.
      */
     @Override
-    public double cost() {
-        return pizza.getCost();
+    public float getCostoTotal() {
+        return (float) pizza.getCost();
+    }
+
+    // @Override
+    // public String getTicket() {
+    // return getDescripcion();
+    // }
+
+    @Override
+    public int getRepeticionMaxIngrediente() {
+        return 1;
     }
 
 }
