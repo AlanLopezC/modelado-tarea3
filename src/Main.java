@@ -12,12 +12,18 @@ import decorator.PanBaguette.*;
 
 public class Main {
 
+    /**
+     * Método para obtener un Ticket 
+     * @param baguette - Producto que se compra.
+     * @return String - Ticket.
+     */
     public static String getTicket(Baguette baguette){
         
         // OBJETOS
         String[] ingredientes = baguette.getDescripcion().split(",");
         String description = "Descripción: ";
         String descriptionAux = "Descripción: ";
+
         for(String ingredient : ingredientes){
             
             description += ingredient + ", ";
@@ -28,17 +34,26 @@ public class Main {
                 descriptionAux = "";
             }
         }
-        String ticket = "                   \"Baguettes WaySub y Pizzas de Don Cangrejo\"\n" +
-                        "                         Hernandez Melo Valentin Benito\n" +
-                        "                             RFC - HEMV740214565\n" + 
-                        "          Mercado, Medellín #20, Cuauhtémoc, 06760 Ciudad de México, CDMX\n" + 
-                        "                             TEL. 55-95-02-54-87\n" + 
-                        "                           hernandezmelo@gmail.com\n\n" +
-                        "          " + description + 
-                        "\n\n                             Costo Total: $ " + baguette.getCostoTotal() + "\n";
+
+        String ticket = "\nTICKET:\n" + 
+                        "\u250c----------------------------------------------------------------------------------\u2510".replace('-', '\u2500') + "\n" + 
+                        "\u2502                   \"Baguettes WaySub y Pizzas de Don Cangrejo\"                    \u2502\n" +
+                        "\u2502                         Hernandez Melo Valentin Benito                           \u2502\n" +
+                        "\u2502                             RFC - HEMV740214565                                  \u2502\n" + 
+                        "\u2502          Mercado, Medellín #20, Cuauhtémoc, 06760 Ciudad de México, CDMX         \u2502\n" + 
+                        "\u2502                             TEL. 55-95-02-54-87                                  \u2502\n" + 
+                        "\u2502                           hernandezmelo@gmail.com                                \u2502\n\u2502\n" +
+                        "\u2502          " + description + 
+                        "\n\n                             Costo Total: $ " + baguette.getCostoTotal() + "\n" + 
+                        "\u2514----------------------------------------------------------------------------------\u2518".replace('-', '\u2500') + "\n" + 
+                        "\nGRACIAS POR TU COMPRA\n";
         return ticket;
     }
 
+    /**
+     * Método para elegir los ingredientes del Baguette.
+     * @param baguett - Baguette que contendrá los ingredientes.
+     */
     public static void elegirIngredientes(Baguette baguett) {
         
         // OBJETOS
@@ -61,7 +76,7 @@ public class Main {
                     "8.- Mostaza.\n" +
                     "9.- Catsup.\n" +
                     "10.- Mayonesa.\n" +
-                    "0.- Abortar.\n");
+                    "0.- TERMINAR SIMULACIÓN.\n");
 
             while (true) {
                 try {
@@ -84,15 +99,13 @@ public class Main {
                             "8.- Mostaza.\n" +
                             "9.- Catsup.\n" +
                             "10.- Mayonesa.\n" +
-                            "0.- Terminar simulacion.\n");
+                            "0.- TERMINAR SIMULACIÓN.\n");
                 }
             }
 
             switch (eleccion) {
                 case 1:
                     System.out.println("\n" + getTicket(baguett));
-                    /*System.out.println("\nDescripcion Baguett:\n" + baguett.getDescripcion() +
-                            "\nCosto Total: $" + baguett.getCostoTotal());*/
                     break;
 
                 case 2:
@@ -188,6 +201,9 @@ public class Main {
         sc.close();
     }
 
+    /**
+     * Método para generar un Baguette. 
+     */
     private static void opcionBaguette(){
 
         // OBJETOS
@@ -201,7 +217,7 @@ public class Main {
                 "1.- Pan Miel.\n" +
                 "2.- Pan Integral.\n" +
                 "3.- Pan Italiano.\n" +
-                "0.- Abortar elección.\n");
+                "0.- TERMINAR SIMULACIÓN.\n");
 
         while (true) {
             try {
@@ -217,7 +233,7 @@ public class Main {
                         "1.- Pan Miel.\n" +
                         "2.- Pan Integral.\n" +
                         "3.- Pan Italiano.\n" +
-                        "0.- Abortar elección.\n");
+                        "0.- TERMINAR SIMULACIÓN.\n");
             }
         }
 
@@ -244,6 +260,9 @@ public class Main {
         scn.close();
     }
 
+    /**
+     * Método para generar una Pizza.
+     */
     private static void opcionPizza(){
 
         // OBJETOS
@@ -254,30 +273,30 @@ public class Main {
         int eleccion;
 
         System.out.print("\nElige la pizza que deseas:\n" +
-                "1.- Boneless Pizza.\n" +
-                "2.- Pizza Extra Queso.\n" +
-                "3.- Pizza Hawaiana..\n" +
-                "4.- Pizza Mexicana.\n" + 
-                "5.- Pizza Pepperoni.\n" + 
-                "6.- Terminar simulación.\n");
+                "1.- Elegir Boneless Pizza y pagar.\n" +
+                "2.- Elegir Pizza Extra Queso y pagar.\n" +
+                "3.- Elegir Pizza Hawaiana y pagar.\n" +
+                "4.- Elegir Pizza Mexicana y pagar.\n" + 
+                "5.- Elegir Pizza Pepperoni y pagar.\n" + 
+                "0.- TERMINAR SIMULACIÓN.\n");
 
         while (true) {
             try {
                 System.out.print("Elección: ");
                 String opcionUsuario = scn.nextLine();
                 eleccion = Integer.parseInt(opcionUsuario);
-                if(!(0 <= eleccion & eleccion <= 6)){
+                if(!(0 <= eleccion & eleccion <= 5)){
                     throw new NumberFormatException();
                 }
                 break;
             } catch (NumberFormatException e) {
                 System.out.print("\nPor favor elige la opcion VALIDA\n" +
-                "1.- Boneless Pizza.\n" +
-                "2.- Pizza Extra Queso.\n" +
-                "3.- Pizza Hawaiana..\n" +
-                "4.- Pizza Mexicana.\n" + 
-                "5.- Pizza Pepperoni.\n" + 
-                "6.- Terminar Simulación.");
+                "1.- Elegir Boneless Pizza y pagar..\n" +
+                "2.- Elegir Pizza Extra Queso y pagar..\n" +
+                "3.- Elegir Pizza Hawaiana y pagar..\n" +
+                "4.- Elegir Pizza Mexicana y pagar..\n" + 
+                "5.- Elegir Pizza Pepperoni y pagar..\n" + 
+                "0.- TERMINAR SIMULACIÓN.\n");
             }
         }
 
@@ -299,6 +318,7 @@ public class Main {
             case 0:
                 break;
         }
+
         if(pizza != null){
             System.out.println(getTicket(pizza)); 
         }
