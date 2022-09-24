@@ -12,10 +12,6 @@ public class Jamon extends Ingrediente {
         return baguette.getDescripcion() + ", Jamon";
     }
 
-    // public String getTicket() {
-    // return baguette.getTicket() + "Jamon --- $10.0\n";
-    // }
-
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

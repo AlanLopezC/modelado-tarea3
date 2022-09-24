@@ -11,11 +11,7 @@ public class Mayonesa extends Ingrediente {
     public String getDescripcion() {
         return baguette.getDescripcion() + ", Mayonesa";
     }
-
-    // public String getTicket() {
-    // return baguette.getTicket() + "Mayonesa --- $3.0\n";
-    // }
-
+    
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

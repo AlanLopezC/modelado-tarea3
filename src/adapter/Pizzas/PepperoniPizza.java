@@ -7,7 +7,7 @@ public class PepperoniPizza extends Pizza {
         this.ingredient = "";
         this.cheese = "manchego";
         this.meat = "pepperoni";
-        this.dough = "thick dough";
+        this.dough = "masa espesa";
         this.cost = 3.99;
     }
 }

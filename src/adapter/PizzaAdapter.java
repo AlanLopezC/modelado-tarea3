@@ -2,42 +2,43 @@ package adapter;
 
 import decorator.PanBaguette.Baguette;
 
-/*
- * Class that adapts a Pizza into a Baguette.
+/**
+ * Clase que adapta una Pizza a una Baguette.
  */
-class PizzaAdapter implements Baguette {
+public class PizzaAdapter implements Baguette {
     Pizza pizza;
 
+    /**
+     * Método para crear un objeto que envuelva a una Pizza.
+     * @param pizza - Pizza a envolver.
+     */
     public PizzaAdapter(Pizza pizza) {
         this.pizza = pizza;
     }
 
-    /*
-     * Gives a description of all the pizza ingredients and its cost.
-     * 
-     * @return String The pizza complete description.
+    /**
+     * Da una descripción de todos los ingredientes de la pizza y su costo.
+     * @return String - La pizza descripción completa.
      */
     @Override
     public String getDescripcion() {
-        return "Pizza with " + pizza.getIngredient() + ", " + pizza.getCheese() + ", " + pizza.getMeat() + ", "
-                + pizza.getDough() + ", and costs: $" + pizza.getCost();
+        return "Pizza con " + pizza.getIngredient() + ", " + pizza.getCheese() + ", " + pizza.getMeat() + ", "
+                + pizza.getDough();
     }
 
-    /*
-     * Returns the cost of the pizza.
-     * 
-     * @return double The pizza cost.
+    /**
+     * Devuelve el costo de la pizza.
+     * @return double - El precio de la pizza.
      */
     @Override
     public float getCostoTotal() {
         return (float) pizza.getCost();
     }
 
-    // @Override
-    // public String getTicket() {
-    // return getDescripcion();
-    // }
-
+    /**
+     * Método para obtener la cantidad máxima que se puede repetir la pizza.
+     * @return int - Cantidad máxima que se puede repetir la pizza. 
+     */
     @Override
     public int getRepeticionMaxIngrediente() {
         return 1;

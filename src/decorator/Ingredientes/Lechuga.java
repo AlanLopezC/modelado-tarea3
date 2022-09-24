@@ -12,10 +12,6 @@ public class Lechuga extends Ingrediente {
         return baguette.getDescripcion() + ", Lechuga";
     }
 
-    // public String getTicket() {
-    // return baguette.getTicket() + "Lechuga --- $5.0\n";
-    // }
-
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

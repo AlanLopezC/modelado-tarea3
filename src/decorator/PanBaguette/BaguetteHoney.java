@@ -10,10 +10,6 @@ public class BaguetteHoney implements Baguette {
         return descripcion;
     }
 
-    public String getTicket() {
-        return "Pan Miel --- $15.0\n";
-    }
-
     public float getCostoTotal() {
         return costo;
     }

@@ -7,7 +7,7 @@ public class BonelessPizza extends Pizza {
         this.ingredient = "";
         this.cheese = "manchego";
         this.meat = "boneless";
-        this.dough = "thick dough";
+        this.dough = "Masa espesa";
         this.cost = 4.99;
     }
 }

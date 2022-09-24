@@ -1,29 +1,58 @@
 
 import java.util.Scanner;
 
+import adapter.*;
+import adapter.Pizzas.BonelessPizza;
+import adapter.Pizzas.ExtraCheesePizza;
+import adapter.Pizzas.HawaianPizza;
+import adapter.Pizzas.MexicanPizza;
+import adapter.Pizzas.PepperoniPizza;
 import decorator.Ingredientes.*;
 import decorator.PanBaguette.*;
 
 public class Main {
 
+    public static String getTicket(Baguette baguette){
+        
+        // OBJETOS
+        String[] ingredientes = baguette.getDescripcion().split(",");
+        String description = "Descripción: ";
+        String descriptionAux = "Descripción: ";
+        for(String ingredient : ingredientes){
+            
+            description += ingredient + ", ";
+            descriptionAux += ingredient + ", ";
+
+            if (descriptionAux.length() >= 63){
+                description += "\n        ";
+                descriptionAux = "";
+            }
+        }
+        String ticket = "                   \"Baguettes WaySub y Pizzas de Don Cangrejo\"\n" +
+                        "                         Hernandez Melo Valentin Benito\n" +
+                        "                             RFC - HEMV740214565\n" + 
+                        "          Mercado, Medellín #20, Cuauhtémoc, 06760 Ciudad de México, CDMX\n" + 
+                        "                             TEL. 55-95-02-54-87\n" + 
+                        "                           hernandezmelo@gmail.com\n\n" +
+                        "          " + description + 
+                        "\n\n                             Costo Total: $ " + baguette.getCostoTotal() + "\n";
+        return ticket;
+    }
+
     public static void elegirIngredientes(Baguette baguett) {
-        Baguette baguette2 = baguett;
+        
+        // OBJETOS
+        Baguette baguetteConIngredientes = baguett;
         Scanner sc = new Scanner(System.in);
-        int opcion;
-        int contadorPollo = 0;
-        int contadorPeperoni = 0;
-        int contadorJamon = 0;
-        int contadorLechuga = 0;
-        int contadorJitomate = 0;
-        int contadorCebolla = 0;
-        int contadorMostaza = 0;
-        int contadorCatsup = 0;
-        int contadorMayonesa = 0;
+        int[] contadorIngredientes = new int[9];
+
+        // VARIABLES
+        int eleccion;
 
         do {
-            System.out.println("Elige tu(s) ingrediente(s): \n" +
+            System.out.print("\nElige tu(s) ingrediente(s):\n" +
                     "1.- Pagar.\n" +
-                    "2.- Pollo.\n" +
+                    "2.- Pollo. 🍗\n" +
                     "3.- Peperoni.\n" +
                     "4.- Jamon.\n" +
                     "5.- Lechuga.\n" +
@@ -32,15 +61,19 @@ public class Main {
                     "8.- Mostaza.\n" +
                     "9.- Catsup.\n" +
                     "10.- Mayonesa.\n" +
-                    "0.- Terminar simulacion.\n");
+                    "0.- Abortar.\n");
 
             while (true) {
                 try {
+                    System.out.print("Elección: ");
                     String opcionUsuario = sc.nextLine();
-                    opcion = Integer.parseInt(opcionUsuario);
+                    eleccion = Integer.parseInt(opcionUsuario);
+                    if(!(0 <= eleccion & eleccion <= 10)){
+                        throw new NumberFormatException();
+                    }
                     break;
-                } catch (NumberFormatException ex) {
-                    System.out.println("Por favor elige la opcion VALIDA "
+                } catch (NumberFormatException e) {
+                    System.out.print("\nPor favor elige la opcion VALIDA\n"
                             + "1.- Pagar.\n" +
                             "2.- Pollo.\n" +
                             "3.- Peperoni.\n" +
@@ -55,139 +88,140 @@ public class Main {
                 }
             }
 
-            switch (opcion) {
+            switch (eleccion) {
                 case 1:
-                    System.out.println("Descripcion Baguett:\n" + baguett.getDescripcion() +
-                            "\nCosto Total: $" + baguett.getCostoTotal());
-                    // System.out.println(baguett.getTicket());
+                    System.out.println("\n" + getTicket(baguett));
+                    /*System.out.println("\nDescripcion Baguett:\n" + baguett.getDescripcion() +
+                            "\nCosto Total: $" + baguett.getCostoTotal());*/
                     break;
 
                 case 2:
-                    baguette2 = new Pollo(baguette2);
-                    if (contadorPollo < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Pollo(baguetteConIngredientes);
+                    if (contadorIngredientes[0] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Pollo(baguett);
-                        contadorPollo++;
+                        contadorIngredientes[0] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Pollo");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Pollo");
                     }
                     break;
 
                 case 3:
-                    baguette2 = new Pepperoni(baguette2);
-                    if (contadorPeperoni < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Pepperoni(baguetteConIngredientes);
+                    if (contadorIngredientes[1] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Pepperoni(baguett);
-                        contadorPeperoni++;
+                        contadorIngredientes[1] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Peperoni");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Peperoni");
                     }
                     break;
 
                 case 4:
-                    baguette2 = new Jamon(baguette2);
-                    if (contadorJamon < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Jamon(baguetteConIngredientes);
+                    if (contadorIngredientes[2] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Jamon(baguett);
-                        contadorJamon++;
+                        contadorIngredientes[2] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Jamon");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Jamon");
                     }
                     break;
 
                 case 5:
-                    baguette2 = new Lechuga(baguette2);
-                    if (contadorLechuga < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Lechuga(baguetteConIngredientes);
+                    if (contadorIngredientes[3] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Lechuga(baguett);
-                        contadorLechuga++;
+                        contadorIngredientes[3] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Lechuga");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Lechuga");
                     }
                     break;
                 case 6:
-                    baguette2 = new Jitomate(baguette2);
-                    if (contadorJitomate < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Jitomate(baguetteConIngredientes);
+                    if (contadorIngredientes[4] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Jitomate(baguett);
-                        contadorJitomate++;
+                        contadorIngredientes[4] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Jitomate");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Jitomate");
                     }
                     break;
                 case 7:
-                    baguette2 = new Cebolla(baguette2);
-                    if (contadorCebolla < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Cebolla(baguetteConIngredientes);
+                    if (contadorIngredientes[5] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Cebolla(baguett);
-                        contadorCebolla++;
+                        contadorIngredientes[5] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Cebolla");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Cebolla");
                     }
                     break;
                 case 8:
-                    baguette2 = new Mostaza(baguette2);
-                    if (contadorMostaza < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Mostaza(baguetteConIngredientes);
+                    if (contadorIngredientes[6] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Mostaza(baguett);
-                        contadorMostaza++;
+                        contadorIngredientes[6] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Mostaza");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Mostaza");
                     }
                     break;
                 case 9:
-                    baguette2 = new Catsup(baguette2);
-                    if (contadorCatsup < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Catsup(baguetteConIngredientes);
+                    if (contadorIngredientes[7] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Catsup(baguett);
-                        contadorCatsup++;
+                        contadorIngredientes[7] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Catsup");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Catsup");
                     }
                     break;
                 case 10:
-                    baguette2 = new Mayonesa(baguette2);
-                    if (contadorMayonesa < baguette2.getRepeticionMaxIngrediente()) {
+                    baguetteConIngredientes = new Mayonesa(baguetteConIngredientes);
+                    if (contadorIngredientes[8] < baguetteConIngredientes.getRepeticionMaxIngrediente()) {
                         baguett = new Mayonesa(baguett);
-                        contadorMayonesa++;
+                        contadorIngredientes[8] += 1;
                     } else {
-                        System.out.println("Solo puedes tener como máximo triple Mayonesa");
+                        System.out.println("\n AVISO: Solo puedes tener como máximo triple Mayonesa");
                     }
                     break;
 
                 case 0:
                     break;
-
-                default:
-                    System.out.println("\nPor favor elige el inrediente que deseas agregar.");
-                    break;
-
             }
 
-        } while (opcion != 0 && opcion != 1);
+        } while (eleccion != 0 && eleccion != 1);
         sc.close();
     }
 
-    public static void main(String[] args) {
+    private static void opcionBaguette(){
 
+        // OBJETOS
         Baguette baguett;
         Scanner scn = new Scanner(System.in);
-        int opcion;
 
-        System.out.println("Bienvenidos al WaySub \n"
-                + "Elige el pan que deseas:\n" +
+        // VARIABLES
+        int eleccion;
+
+        System.out.print("\nElige el pan que deseas:\n" +
                 "1.- Pan Miel.\n" +
                 "2.- Pan Integral.\n" +
                 "3.- Pan Italiano.\n" +
-                "0.- Terminar simulacion.\n");
+                "0.- Abortar elección.\n");
 
         while (true) {
             try {
+                System.out.print("Elección: ");
                 String opcionUsuario = scn.nextLine();
-                opcion = Integer.parseInt(opcionUsuario);
+                eleccion = Integer.parseInt(opcionUsuario);
+                if(!(0 <= eleccion & eleccion <= 3)){
+                    throw new NumberFormatException();
+                }
                 break;
-            } catch (NumberFormatException ex) {
-                System.out.println("Por favor elige la opcion VALIDA "
-                        + "Elige el pan que deseas:\n" +
+            } catch (NumberFormatException e) {
+                System.out.print("\nPor favor elige la opcion VALIDA\n" +
                         "1.- Pan Miel.\n" +
                         "2.- Pan Integral.\n" +
                         "3.- Pan Italiano.\n" +
-                        "0.- Terminar simulacion.\n");
+                        "0.- Abortar elección.\n");
             }
         }
-        switch (opcion) {
+
+        switch (eleccion) {
 
             case 1:
                 baguett = new BaguetteHoney();
@@ -206,6 +240,110 @@ public class Main {
             case 0:
                 break;
 
+        }
+        scn.close();
+    }
+
+    private static void opcionPizza(){
+
+        // OBJETOS
+        Baguette pizza = null;
+        Scanner scn = new Scanner(System.in);
+
+        // VARIABLES
+        int eleccion;
+
+        System.out.print("\nElige la pizza que deseas:\n" +
+                "1.- Boneless Pizza.\n" +
+                "2.- Pizza Extra Queso.\n" +
+                "3.- Pizza Hawaiana..\n" +
+                "4.- Pizza Mexicana.\n" + 
+                "5.- Pizza Pepperoni.\n" + 
+                "6.- Terminar simulación.\n");
+
+        while (true) {
+            try {
+                System.out.print("Elección: ");
+                String opcionUsuario = scn.nextLine();
+                eleccion = Integer.parseInt(opcionUsuario);
+                if(!(0 <= eleccion & eleccion <= 6)){
+                    throw new NumberFormatException();
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("\nPor favor elige la opcion VALIDA\n" +
+                "1.- Boneless Pizza.\n" +
+                "2.- Pizza Extra Queso.\n" +
+                "3.- Pizza Hawaiana..\n" +
+                "4.- Pizza Mexicana.\n" + 
+                "5.- Pizza Pepperoni.\n" + 
+                "6.- Terminar Simulación.");
+            }
+        }
+
+        switch (eleccion) {
+
+            case 1:
+                pizza = new PizzaAdapter(new BonelessPizza());
+                break;
+            case 2:
+                pizza = new PizzaAdapter(new ExtraCheesePizza());
+                break;
+            case 3:
+                pizza = new PizzaAdapter(new HawaianPizza());
+                break;
+            case 4: 
+                pizza = new PizzaAdapter(new MexicanPizza());
+            case 5: 
+                pizza = new PizzaAdapter(new PepperoniPizza());
+            case 0:
+                break;
+        }
+        if(pizza != null){
+            System.out.println(getTicket(pizza)); 
+        }
+        scn.close();
+    }
+
+    public static void main(String[] args) {
+
+        // OBJETOS
+        Scanner scn = new Scanner(System.in);
+
+        // VARIABLES 
+        int eleccion;
+
+        System.out.print("\n🥖 Bienvenidos al Baguettes WaySub y Pizzas de Don Cangrejo 🍕\n" 
+                        + "¿Qué desesas comer?:\n"
+                        + "1.- Baguette.\n"
+                        + "2.- Pizza.\n"
+                        + "0.- Salir del Main Interactivo.\n");
+        
+        while(true){
+            try{
+                System.out.print("Elección: ");
+                String opcionUsuario = scn.nextLine().strip();
+                eleccion = Integer.parseInt(opcionUsuario);
+                if(!(0 <= eleccion & eleccion <= 2)){
+                    throw new NumberFormatException();
+                }
+                break;
+            }
+            catch(NumberFormatException e){
+                System.out.print("\nPor favor elige la opción VALIDA.\n" 
+                                      + "1.- Baguetter.\n"
+                                      + "2.- Pizza.\n"
+                                      + "0.- Salir del Main Interactivo.\n");
+            }
+        }
+
+        switch (eleccion) {
+            case 1: opcionBaguette();
+                break;
+            case 2: opcionPizza();
+                break;
+            case 0:
+                break;
         }
         scn.close();
     }

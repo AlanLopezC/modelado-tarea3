@@ -10,10 +10,6 @@ public class BaguetteIntegral implements Baguette {
         return descripcion;
     }
 
-    public String getTicket() {
-        return "Pan Integral --- $12.0\n";
-    }
-
     public float getCostoTotal() {
         return costo;
     }

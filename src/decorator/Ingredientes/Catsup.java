@@ -11,11 +11,7 @@ public class Catsup extends Ingrediente {
     public String getDescripcion() {
         return baguette.getDescripcion() + ", Catsup";
     }
-
-    // public String getTicket() {
-    // return baguette.getTicket() + "Catsup --- $3.0\n";
-    // }
-
+    
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

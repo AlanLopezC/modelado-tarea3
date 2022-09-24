@@ -12,10 +12,6 @@ public class Cebolla extends Ingrediente {
         return baguette.getDescripcion() + ", Cebolla";
     }
 
-    // public String getTicket() {
-    // return baguette.getTicket() + "Cebolla --- $3.0\n";
-    // }
-
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

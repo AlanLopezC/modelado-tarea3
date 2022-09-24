@@ -9,11 +9,7 @@ public class BaguetteItaliano implements Baguette {
     public String getDescripcion() {
         return descripcion;
     }
-
-    public String getTicket() {
-        return "Pan Italiano --- $20.0\n";
-    }
-
+    
     public float getCostoTotal() {
         return costo;
     }

@@ -4,10 +4,10 @@ import adapter.Pizza;
 
 public class HawaianPizza extends Pizza {
     public HawaianPizza() {
-        this.ingredient = "pineapple";
+        this.ingredient = "piña";
         this.cheese = "manchego";
-        this.meat = "jam";
-        this.dough = "thin dough";
+        this.meat = "jamón";
+        this.dough = "masa fina";
         this.cost = 2.99;
     }
 }

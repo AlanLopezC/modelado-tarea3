@@ -12,10 +12,6 @@ public class Mostaza extends Ingrediente {
         return baguette.getDescripcion() + ", Mostaza";
     }
 
-    // public String getTicket() {
-    // return baguette.getTicket() + "Mostaza --- $3.0\n";
-    // }
-
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

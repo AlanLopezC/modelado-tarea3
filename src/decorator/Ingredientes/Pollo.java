@@ -12,10 +12,6 @@ public class Pollo extends Ingrediente {
         return baguette.getDescripcion() + ", Pollo";
     }
 
-    // public String getTicket() {
-    // return baguette.getTicket() + "Pollo --- $15.0\n";
-    // }
-
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }

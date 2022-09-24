@@ -11,11 +11,7 @@ public class Pepperoni extends Ingrediente {
     public String getDescripcion() {
         return baguette.getDescripcion() + ", Peperoni";
     }
-
-    // public String getTicket() {
-    // return baguette.getTicket() + "Peperoni --- $12.0\n";
-    // }
-
+    
     public float getCostoTotal() {
         return baguette.getCostoTotal() + costoIndividual;
     }
